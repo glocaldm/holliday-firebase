@@ -35,7 +35,7 @@ export class AvailabilitiesService {
     }
     return this.http
       .get<string>(
-        `https://dados-inn-availabilities-fn-988592407000.europe-west3.run.app/`,
+        `https://ical-booking-com-dados-inn-lelnokmu7a-ew.a.run.app`,
         { responseType: 'text' as 'json' }
       )
       .pipe(
