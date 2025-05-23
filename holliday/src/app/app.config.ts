@@ -16,6 +16,19 @@ import { DateUtilityService } from './date.utility.service';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAsymDPQPiWfhrsou6V46AEH7v2hqt8C3E",
+  authDomain: "holliday-dados-inn.firebaseapp.com",
+  projectId: "holliday-dados-inn",
+  storageBucket: "holliday-dados-inn.firebasestorage.app",
+  messagingSenderId: "375600436425",
+  appId: "1:375600436425:web:e671f9f589c8195681e918"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideStore({ booking: availabilitiesReducer }),
@@ -23,17 +36,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(),
-    provideFirebaseApp(() =>
-      initializeApp({
-        apiKey: 'AIzaSyDYCZKPmsfpRY8BOA_898XLghR2sqs4Frw',
-        authDomain: 'dados-inn.firebaseapp.com',
-        projectId: 'dados-inn',
-        storageBucket: 'dados-inn.firebasestorage.app',
-        messagingSenderId: '537391388102',
-        appId: '1:537391388102:web:6838704433f61460dd0ec7',
-        measurementId: 'G-N5WYB9LGDT',
-      })
-    ),
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => getAuth()),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
