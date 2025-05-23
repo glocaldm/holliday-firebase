@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+@use "media_queries";
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  color-scheme: light dark;
+  @include mat.theme((
+    color: mat.$rose-palette,
+    typography: Montserrat
+  ));
+}
+
+body {
+  height: 100%;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  @include media_queries.respond-to(small) {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  @include media_queries.respond-to(medium) {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  @include media_queries.respond-to(large) {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

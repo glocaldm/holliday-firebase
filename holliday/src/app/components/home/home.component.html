@@ -1,0 +1,290 @@
+<!-- header -->
+<div class="header">
+  <div><h1>Appartment, Pool, Views and Sunshine</h1></div>
+  <div class="account">
+    <button (click)="onShareButtonClick($event)" mat-button aria-label="Share">
+      <mat-icon>share</mat-icon>
+    </button>
+    <div class="account-login" *ngIf="!(auth.user$ | async); else loggedIn">
+      <button (click)="auth.login()" mat-button aria-label="Log in">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+
+    <ng-template #loggedIn>
+      <div class="account-greet">
+        <img class="account-img" src="{{ (auth.user$ | async)?.photoURL }}" alt="Sample photo" />
+        <button mat-button (click)="auth.logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- image grid -->
+<section class="image-boxes" (click)="onImagesSectionEvent($event)">
+  <img simpleGallery [galleryItems]="galleryItems" [galleryConfig]="galleryConfig" style="border-top-left-radius: 25px; border-bottom-left-radius: 25px" src="beach-1-450-450.jpg"
+       alt="Sample photo" />
+  <img simpleGallery [galleryItems]="galleryItems" [galleryConfig]="galleryConfig" src="single-near-225-225.jpg" alt="Sample photo" />
+  <img simpleGallery [galleryItems]="galleryItems" [galleryConfig]="galleryConfig" style="border-top-right-radius: 25px" src="kitchen-wide-225-225.jpg" alt="Sample photo" />
+  <img simpleGallery [galleryItems]="galleryItems" [galleryConfig]="galleryConfig" src="living-wide-225-225.jpg" alt="Sample photo" />
+  <img simpleGallery [galleryItems]="galleryItems" [galleryConfig]="galleryConfig" style="border-bottom-right-radius: 25px" src="view-1-225-225.jpg" alt="Sample photo" />
+</section>
+
+<!-- bi panel: info | calendar -->
+<div class="bipanel">
+  <div class="left">
+    <h2>Appartment in Alicante</h2>
+    <h3>2 bedrooms<span>, </span>2 swimming pools</h3>
+
+    <div class="qrcodeImage">
+      <qrcode
+        [qrdata]="'https://wa.me/34722206453'"
+        [allowEmptyString]="true"
+        [ariaLabel]="'Contact Via Whatsapp'"
+        [cssClass]="'center'"
+        [colorDark]="'#000000ff'"
+        [colorLight]="'#ffffffff'"
+        [elementType]="'canvas'"
+        [errorCorrectionLevel]="'H'"
+        [imageSrc]="'square-whatsapp-brands.svg'"
+        [imageHeight]="75"
+        [imageWidth]="75"
+        [margin]="4"
+        [scale]="1"
+        [title]="'Contact Via Whatsapp'"
+        [width]="285"
+      ></qrcode>
+
+      <qrcode
+        [qrdata]="'mailto:resgranal@outlook.com'"
+        [allowEmptyString]="true"
+        [ariaLabel]="'Contact Via Whatsapp'"
+        [cssClass]="'center'"
+        [colorDark]="'#000000ff'"
+        [colorLight]="'#ffffffff'"
+        [elementType]="'canvas'"
+        [errorCorrectionLevel]="'H'"
+        [imageSrc]="'square-envelope-solid.svg'"
+        [imageHeight]="75"
+        [imageWidth]="75"
+        [margin]="4"
+        [scale]="1"
+        [title]="'Contact Via Email'"
+        [width]="285"
+      ></qrcode>
+    </div>
+
+    <div class="info-grid">
+
+      <div class="info-item">
+        <img src="host-150-150.jpg" alt="Sample photo" />
+        <div>
+          <h3>Hosted by Dados Inn</h3>
+          <h4>Booking award</h4>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>pin_drop</mat-icon>
+        </a>
+        <div>
+          <h3>Great Location</h3>
+          <h4>Natural Reserve Beach</h4>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>restaurant</mat-icon>
+        </a>
+        <div>
+          <h3>Chiringuitos and restaurant</h3>
+          <h4>Near by</h4>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>restaurant</mat-icon>
+        </a>
+        <div>
+          <h3>Alicante center and night life</h3>
+          <h4>19min by car</h4>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>airport_shuttle</mat-icon>
+        </a>
+        <div>
+          <h3>Public transport</h3>
+          <h4>Bus and taxi</h4>
+        </div>
+      </div>
+
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>flight</mat-icon>
+        </a>
+        <div>
+          <h3>Airport 10min</h3>
+          <h4>Taxi or bus shuttle</h4>
+        </div>
+      </div>
+
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>surfing</mat-icon>
+        </a>
+        <div>
+          <h3>Natural beach at 5min by car</h3>
+          <h4>public bus</h4>
+        </div>
+      </div>
+
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>pool</mat-icon>
+        </a>
+        <div>
+          <h3>Swimming Pools</h3>
+          <h4>Well mantained pools with view to bay of Alicante</h4>
+        </div>
+      </div>
+
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>local_bar</mat-icon>
+        </a>
+        <div>
+          <h3>Alicante</h3>
+          <h4>Shopping and social life</h4>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>local_mall</mat-icon>
+        </a>
+        <div>
+          <h3>Gran Alacant</h3>
+          <h4>Shopping areas</h4>
+        </div>
+      </div>
+
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>local_taxi</mat-icon>
+        </a>
+        <div>
+          <h3>Car rental</h3>
+          <h4>Assorted selection and affordable models</h4>
+        </div>
+      </div>
+
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>directions_boat</mat-icon>
+        </a>
+        <div>
+          <h3>Santa Pola</h3>
+          <h4>10min</h4>
+        </div>
+      </div>
+
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>location_city</mat-icon>
+        </a>
+        <div>
+          <h3>Benidorm</h3>
+          <h4>Bus Shuttle available</h4>
+        </div>
+      </div>
+
+
+      <div class="info-item">
+        <a href="#map">
+          <mat-icon>pool</mat-icon>
+        </a>
+        <div>
+          <h3>Aqua park and safari</h3>
+          <h4>Bus Shuttle available</h4>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+  <div class="right">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Date availability and selection based on
+          <a href="https://www.booking.com/Share-i72h1tl"
+             title="https://www.booking.com/Share-i72h1tl">Booking</a>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-content-container">
+        <div>
+          <mat-calendar #calendarA class="card-calendar"
+                        [selected]="selectedRangeValue"
+                        (selectedChange)="selectedChange($event)"
+                        [startAt]="viewDateA"
+                        [dateClass]="dateClass"
+          ></mat-calendar>
+          <mat-calendar #calendarB
+                        [selected]="selectedRangeValue"
+                        (selectedChange)="selectedChange($event)"
+                        [startAt]="viewDateB"
+                        [dateClass]="dateClass"
+          ></mat-calendar>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Check-in</mat-label>
+            <input matInput [matDatepicker]="checkInPicker" [(ngModel)]="checkInDate"
+                   (dateChange)="onCheckInDateChange($event)">
+            <mat-datepicker-toggle matSuffix [for]="checkInPicker"></mat-datepicker-toggle>
+            <mat-datepicker #checkInPicker
+                            [dateClass]="dateClass"
+                            [startAt]="viewDateA"
+            ></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Check-out</mat-label>
+            <input matInput [matDatepicker]="checkOutPicker" [(ngModel)]="checkOutDate"
+                   (dateChange)="onCheckOutDateChange($event)">
+            <mat-datepicker-toggle matSuffix [for]="checkOutPicker"></mat-datepicker-toggle>
+            <mat-datepicker #checkOutPicker
+                            [dateClass]="dateClass"
+                            [startAt]="viewDateB"
+            ></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button (click)="onBookingClick($event)" mat-raised-button
+                color="warn">{{ (isBookingValid$ | async) == true ? 'Kindly contact the host via email or whatsapp to confirm :)' : 'SELECT DATES' }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+
+<!-- map -->
+<div id="map" #map>
+</div>
