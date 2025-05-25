@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, provideHttpClient} from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { availabilitiesReducer } from './availabilities.store';
@@ -15,6 +15,8 @@ import { AvailabilitiesService } from './availabilities.service';
 import { DateUtilityService } from './date.utility.service';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
+import {AuthService} from './auth.service';
+import {AuthInterceptor} from './auth.interceptor';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -38,6 +40,14 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => getAuth()),
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    AvailabilitiesService,
+    DateUtilityService,
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
@@ -46,7 +56,5 @@ export const appConfig: ApplicationConfig = {
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectInZone: true, // If set to true, the connection is established within the Angular zone
     }),
-    AvailabilitiesService,
-    DateUtilityService,
   ],
 };

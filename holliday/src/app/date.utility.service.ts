@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {convertIcsCalendar} from 'ts-ics';
 
 
 export class DateUtil {
@@ -37,11 +38,26 @@ export class DateUtil {
 
   static getDaysArray = (s: Date,e: Date): Date[] => {
     const a=[];
-    for(const d=new Date(s);d<=new Date(e);d.setDate(d.getDate()+1)){ 
+    for(const d=new Date(s);d<=new Date(e);d.setDate(d.getDate()+1)){
       a.push(new Date(d));
     }
     return a;
   };
+
+  static icsToDates = (rawICS: string) => {
+    const evs = convertIcsCalendar(undefined, rawICS).events;
+    if (evs !== undefined) {
+      return evs.flatMap((ev) => {
+        if (ev.end !== undefined) {
+          return DateUtil.getDaysArray(ev.start.date, ev.end.date);
+        } else {
+          return [ev.start.date];
+        }
+      });
+    } else {
+      return [];
+    }
+  }
 
 
 }
@@ -49,4 +65,5 @@ export class DateUtil {
 @Injectable({
   providedIn: 'root'
 })
-export class DateUtilityService extends DateUtil {}
+export class DateUtilityService extends DateUtil {
+}
