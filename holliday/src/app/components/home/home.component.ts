@@ -45,6 +45,7 @@ import {
   GalleryItem,
   SimpleGalleryDirective,
 } from 'ngx-simple-gallery';
+import {ChatComponent} from '../chat/chat.component';
 
 @Component({
   selector: 'app-home',
@@ -60,6 +61,7 @@ import {
     MatDatepickerInput,
     MatDatepicker,
     QRCodeComponent,
+    ChatComponent,
     MatIconModule,
     SimpleGalleryDirective,
   ],
@@ -136,21 +138,6 @@ export class HomeComponent
       version: 'weekly',
       libraries: ['maps', 'marker'],
     });
-  }
-
-  async callBackend() {
-    const idToken = await this.auth.getIdToken();
-    const headers = { Authorization: `Bearer ${idToken}` };
-
-    this.http
-      .post(
-        'https://dados-inn-infos-fn-988592407000.europe-west3.run.app',
-        { data: { messages: [{ user: 'blah', system: 'blah' }] } },
-        { headers: headers }
-      )
-      .subscribe((response) => {
-        console.log('Cloud Run Response:', response);
-      });
   }
 
   updateDates = (dates: Array<Date>): void => {

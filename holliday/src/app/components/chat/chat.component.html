@@ -1,0 +1,17 @@
+<mat-card class="chat-container">
+  <div class="messages">
+    <div *ngFor="let msg of messages" [ngClass]="msg.role" class="message">
+      <span>{{ msg.content }}</span>
+    </div>
+  </div>
+
+  <form [formGroup]="chatForm" (ngSubmit)="sendMessage()" class="chat-form">
+    <mat-form-field appearance="fill" class="full-width">
+      <input matInput formControlName="message" placeholder="Q&amp;A" autocomplete="off">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="chatForm.invalid">
+      Send
+    </button>
+  </form>
+</mat-card>

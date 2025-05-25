@@ -1,0 +1,36 @@
+.chat-container {
+  min-height: 20vh;
+  /* max-width: 600px; */
+  margin: 20px auto;
+  padding: 20px;
+  display: flex;
+  justify-content: end;
+}
+
+.messages {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.message {
+  margin: 10px 0;
+}
+
+.user {
+  text-align: right;
+}
+
+.assistant {
+  text-align: left;
+}
+
+.chat-form {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.full-width {
+  flex: 1;
+}
