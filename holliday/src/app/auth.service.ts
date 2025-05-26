@@ -34,7 +34,6 @@ export class AuthService {
     return auth ? this.http.get("https://verify-and-chat-lelnokmu7a-ew.a.run.app/",
       {headers: {"Authorization": `Bearer ${auth.getIdToken()}`}})
       .pipe(map(v => {
-        console.log(v)
         return v !== null
       })) : of(false)
   }

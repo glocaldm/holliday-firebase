@@ -17,7 +17,9 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import {AuthService} from './auth.service';
 import {AuthInterceptor} from './auth.interceptor';
-
+import {chatReducer} from './chat.store';
+import {ChatEffects} from './chat.effects';
+import {initializeAppCheck, provideAppCheck, ReCaptchaV3Provider} from '@angular/fire/app-check';
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAsymDPQPiWfhrsou6V46AEH7v2hqt8C3E",
@@ -29,16 +31,25 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const firebaseApp = initializeApp(firebaseConfig);
+// Initialize App Check
+// Replace 'YOUR_RECAPTCHA_ENTERPRISE_SITE_KEY' with your actual key
+// Make sure you've registered your web app in App Check in the Firebase Console
+// and configured reCAPTCHA Enterprise for your Firebase project.
+// isDebug = true allows testing locally/on non-registered domains (DO NOT USE IN PRODUCTION)
+const appCheck = initializeAppCheck(firebaseApp, {
+    provider: new ReCaptchaV3Provider('6LcdUEgrAAAAALZo_pZ9hZgc_4AhSO-zMn_gxFCt')
+});
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideStore({ booking: availabilitiesReducer }),
-    provideEffects([AvailabilitiesEffects]),
+    provideStore({ booking: availabilitiesReducer, chat: chatReducer }),
+    provideEffects([AvailabilitiesEffects, ChatEffects]),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(),
-    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideFirebaseApp(() => firebaseApp),
+    provideAppCheck(() => appCheck),
     provideAuth(() => getAuth()),
     AuthService,
     {

@@ -46,11 +46,13 @@ import {
   SimpleGalleryDirective,
 } from 'ngx-simple-gallery';
 import {ChatComponent} from '../chat/chat.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-home',
   imports: [
     MatButtonModule,
+    MatTooltipModule,
     CommonModule,
     MatCardModule,
     MatCalendar,
@@ -73,7 +75,7 @@ export class HomeComponent
   extends DateSelectorUiValidatorComponent
   implements OnInit
 {
-  featureBot = false;
+  featureBot = true;
   readonly dialog = inject(MatDialog);
 
   @ViewChild('calendarA')
@@ -109,8 +111,9 @@ export class HomeComponent
 
   store = inject(Store<AvailabilitiesState>);
   private _bottomSheet = inject(MatBottomSheet);
+  auth = inject(AuthService)
 
-  constructor(public auth: AuthService, private http: HttpClient) {
+  constructor(private http: HttpClient) {
     super();
     this.viewDateB.setMonth(new Date().getMonth() + this.MONTH_OFFSET);
     this.store.dispatch(
