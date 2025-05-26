@@ -22,7 +22,7 @@ export class ChatService {
   // To generate text output, call generateContent with the text input
   req: GenerateContentRequest = {
     generationConfig: {
-      maxOutputTokens: 20,
+      maxOutputTokens: 200,
       temperature: 0,
       candidateCount: 1
     },
