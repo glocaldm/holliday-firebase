@@ -289,15 +289,27 @@
   </div>
 </div>
 
-
-<!-- map -->
-<div id="map" #map>
-</div>
-
 <!-- extra info -->
 <app-chat *ngIf="(auth.user$ | async); else botOffline"></app-chat>
 <ng-template #botOffline>
   <mat-card>
-    <mat-card-header>Log in to chat</mat-card-header>
+    <mat-card-header class="chat-login-header">
+        <span>Log in to chat</span>
+        <div class="account-login" *ngIf="!(auth.user$ | async); else loggedIn">
+          <button
+            (click)="auth.login()"
+            mat-button
+            aria-label="Log in"
+            matTooltip="Log in to enable chatting"
+          >
+            <mat-icon>account_circle</mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
   </mat-card>
 </ng-template>
+
+
+<!-- map -->
+<div id="map" #map>
+</div>
