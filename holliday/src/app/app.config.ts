@@ -38,9 +38,8 @@ export const firebaseApp = initializeApp(firebaseConfig);
 // and configured reCAPTCHA Enterprise for your Firebase project.
 // isDebug = true allows testing locally/on non-registered domains (DO NOT USE IN PRODUCTION)
 const appCheck = initializeAppCheck(firebaseApp, {
-    // provider: new ReCaptchaV3Provider('6LcdUEgrAAAAALZo_pZ9hZgc_4AhSO-zMn_gxFCt'),
     provider: new ReCaptchaV3Provider('6LcdUEgrAAAAALZo_pZ9hZgc_4AhSO-zMn_gxFCt'),
-    isTokenAutoRefreshEnabled: true
+    // isTokenAutoRefreshEnabled: true
 });
 
 export const appConfig: ApplicationConfig = {
